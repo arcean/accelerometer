@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Name=Accel
+Exec=/usr/bin/invoker --type=d -s /opt/Accel/bin/Accel
+Icon=/usr/share/icons/hicolor/80x80/apps/Accel80.png
+X-Window-Icon=
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
