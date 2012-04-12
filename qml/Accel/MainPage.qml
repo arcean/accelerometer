@@ -110,7 +110,7 @@ Page {
 
     function setAxisXValue(value) {
         if (value > 0) {
-            axisXValueRight.width = value * 15;
+            axisXValueRight.width = value * 7;
             axisXValueLeft.x = (axisZ.width / 2) - 2;
             axisXValueLeft.width = 0;
         }
@@ -120,7 +120,7 @@ Page {
             axisXValueLeft.width = 0;
         }
         else {
-            var tempValue = value * 15;
+            var tempValue = value * 7;
             axisXValueRight.width = 0;
             axisXValueLeft.x = (axisX.width / 2) - 2 + tempValue;
             axisXValueLeft.width = Math.abs(tempValue) + 1;
@@ -129,7 +129,7 @@ Page {
 
     function setAxisYValue(value) {
         if (value > 0) {
-            axisYValueRight.width = value * 15;
+            axisYValueRight.width = value * 7;
             axisYValueLeft.x = (axisY.width / 2) - 2;
             axisYValueLeft.width = 0;
         }
@@ -139,7 +139,7 @@ Page {
             axisYValueLeft.width = 0;
         }
         else {
-            var tempValue = value * 15;
+            var tempValue = value * 7;
             axisYValueRight.width = 0;
             axisYValueLeft.x = (axisY.width / 2) - 2 + tempValue;
             axisYValueLeft.width = Math.abs(tempValue) + 1;
@@ -148,7 +148,7 @@ Page {
 
     function setAxisZValue(value) {
         if (value > 0) {
-            axisZValueRight.width = value * 15;
+            axisZValueRight.width = value * 7;
             axisZValueLeft.x = (axisZ.width / 2) - 2;
             axisZValueLeft.width = 0;
         }
@@ -158,7 +158,7 @@ Page {
             axisZValueLeft.width = 0;
         }
         else {
-            var tempValue = value * 15;
+            var tempValue = value * 7;
             axisZValueRight.width = 0;
             axisZValueLeft.x = (axisZ.width / 2) - 2 + tempValue;
             axisZValueLeft.width = Math.abs(tempValue) + 1;
