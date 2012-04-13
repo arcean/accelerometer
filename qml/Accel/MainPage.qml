@@ -4,8 +4,35 @@ import com.nokia.meego 1.0
 Page {
     orientationLock: PageOrientation.LockLandscape
 
+    Button {
+        id: minButton
+        anchors { top: parent.top; left: parent.left }
+        text: "Min"
+        onClicked: {
+            Accelerometer.changeTresholdTo(0);
+        }
+    }
+
+    Button {
+        id: midButton
+        anchors { top: minButton.bottom; left: parent.left }
+        text: "Mid"
+        onClicked: {
+            Accelerometer.changeTresholdTo(1);
+        }
+    }
+
+    Button {
+        id: maxButton
+        anchors { top: midButton.bottom; left: parent.left }
+        text: "Max"
+        onClicked: {
+            Accelerometer.changeTresholdTo(2);
+        }
+    }
+
     Item {
-        anchors.centerIn: parent
+        anchors { top: maxButton.bottom; left: parent.left }
         width: 311 // 4*2 + 3 (middle indicator) and 300 for value bar
         height: 38
 
@@ -172,10 +199,5 @@ Page {
             setAxisYValue(Accelerometer.getY());
             setAxisZValue(Accelerometer.getZ());
         }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: setAxisZValue(0);
     }
 }

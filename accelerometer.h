@@ -5,8 +5,11 @@
 #include <QtSensors/QAccelerometer>
 #include <QtSensors/QAccelerometerReading>
 
-#define MIN_TRESHOLD 4
-#define MIN_G_TRESHOLD 9.5
+#define MIN_TRESHOLD 4.5
+#define MID_TRESHOLD 5.5
+#define MAX_TRESHOLD 6
+
+#define MIN_G_TRESHOLD 9.6
 #define MAX_G_TRESHOLD 10.5
 
 QTM_USE_NAMESPACE
@@ -23,6 +26,7 @@ signals:
 public slots:
     void start();
     void stop();
+    void changeTresholdTo(int treshold_level);
 
     qreal getX();
     qreal getY();
@@ -41,6 +45,7 @@ private:
     int phase1_check22G();
 
     QAccelerometer *accelerometer;
+    int min_treshold;
 
 };
 

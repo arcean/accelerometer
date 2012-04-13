@@ -5,7 +5,25 @@ Accelerometer::Accelerometer(QObject *parent) :
     QObject(parent)
 {
     accelerometer = new QAccelerometer();
+    min_treshold = MID_TRESHOLD;
     connect(accelerometer, SIGNAL(readingChanged()), this, SLOT(readingChanged()));
+}
+
+void Accelerometer::changeTresholdTo(int treshold_level)
+{
+    switch (treshold_level) {
+    case 0:
+        min_treshold = MIN_TRESHOLD;
+        break;
+    case 1:
+        min_treshold = MID_TRESHOLD;
+        break;
+    case 2:
+        min_treshold = MAX_TRESHOLD;
+        break;
+    default:
+        min_treshold = MID_TRESHOLD;
+    }
 }
 
 void Accelerometer::readingChanged()
@@ -27,7 +45,7 @@ void Accelerometer::parseReading()
     qreal y = 0;//accelerometer->reading()->y();
     qreal z = accelerometer->reading()->z();
 
-    // Check, if there's one value > G + MIN_TRESHOLD -> ALARM
+    // Check, if there's one value > G + min_treshold -> ALARM
     int result_phase1G = phase1_checkG(true);
     int result_phase2G = phase1_checkG(false);
     int result_phase2MinTreshold = phase1_checkMinTreshold();
@@ -37,7 +55,7 @@ void Accelerometer::parseReading()
         //TODO: Alarm
         qDebug() << "result_phase1G triggered:" << "ALARM";
     }
-    // Check if there's one G, and the other > MIN_TRESHOLD -> ALARM
+    // Check if there's one G, and the other > min_treshold -> ALARM
     else if (result_phase2G > 0 && result_phase2MinTreshold > 1 && result_phase22G == 0) {
         //TODO: Alarm
         qDebug() << "result_phase2G and result_phase2MinTreshold triggered:" << "ALARM";
@@ -99,19 +117,19 @@ int Accelerometer::phase1_checkG(bool checkMinTreshold)
 
     if (checkMinTreshold) {
         if (x >= 0)
-            x -= MIN_TRESHOLD;
+            x -= min_treshold;
         else
-            x += MIN_TRESHOLD;
+            x += min_treshold;
 
         if (y >= 0)
-            y -= MIN_TRESHOLD;
+            y -= min_treshold;
         else
-            y += MIN_TRESHOLD;
+            y += min_treshold;
 
         if (z >= 0)
-            z -= MIN_TRESHOLD;
+            z -= min_treshold;
         else
-            z += MIN_TRESHOLD;
+            z += min_treshold;
     }
 
     if (isGTreshold(x))
@@ -146,20 +164,20 @@ bool Accelerometer::check22G(qreal value)
 }
 
 /*
-  * Check MIN_TRESHOLD
+  * Check min_treshold
   * return FALSE if it's lower than treshold
   * return TRUE if it's equal or higer than treshold
   */
 bool Accelerometer::checkMinTreshold(qreal value)
 {
     if (value >= 0) {
-        if (value < MIN_TRESHOLD)
+        if (value < min_treshold)
             return false;
         else
             return true;
     }
     else {
-        if (value > -MIN_TRESHOLD)
+        if (value > -min_treshold)
             return false;
         else
             return true;
